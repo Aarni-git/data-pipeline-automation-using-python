@@ -1,0 +1,13 @@
+paths:
+  raw_data: "data/raw/input.csv"
+  processed_data_dir: "data/processed/"
+  log_file: "logs/automation.log"
+
+processing:
+  drop_duplicates: true
+  fill_missing:
+    amount: 0
+    category: "unknown"
+
+schedule:
+  run_every_minutes: 60
