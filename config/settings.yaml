@@ -1,5 +1,5 @@
 paths:
-  raw_data: "data/raw/input.csv"
+  raw_data: "data/raw/credit_card_transactions.csv"
   processed_data_dir: "data/processed/"
   log_file: "logs/automation.log"
 
