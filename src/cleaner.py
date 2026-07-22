@@ -37,11 +37,10 @@ def clean_data(df, config):
     if "amt" in df.columns:
         df["amt"] = pd.to_numeric(df["amt"], errors="coerce")
 
-    # Convert date → datetime
-    if "trans_date" in df.columns:
-        df["trans_date"] = pd.to_datetime(df["trans_date"], errors="coerce")
-
-    logging.info("Data types converted where applicable.")
+    # Convert date → datetime and
+    # Create trans_date column from trans_date_trans_time
+    if "trans_date_trans_time" in df.columns:
+        df["trans_date"] = pd.to_datetime(df["trans_date_trans_time"], errors="coerce").dt.date
 
     # Convert is_fraud → int (0/1)
     if "is_fraud" in df.columns:
@@ -54,9 +53,7 @@ def clean_data(df, config):
     if "category" in df.columns:
         df["category"] = df["category"].astype(str)
 
-    # Create trans_date column from trans_date_trans_time
-    if "trans_date_trans_time" in df.columns:
-        df["trans_date"] = pd.to_datetime(df["trans_date_trans_time"], errors="coerce").dt.date
+    logging.info("Data types converted where applicable.")
 
     # Return cleaned DataFrame
     return df
