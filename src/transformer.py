@@ -28,43 +28,43 @@ def transform_data(df: pd.DataFrame) -> dict:
     daily_summary = (
         df.groupby("trans_date")
         .agg({
-            "amount": ["sum", "mean"],
+            "amt": ["sum", "mean"],
             "is_fraud": "mean",
             "merchant": "count"
         })
         .reset_index()
     )
-    daily_summary.columns = ["trans_date", "total_amount", "avg_amount", "fraud_rate", "transaction_count"]
+    daily_summary.columns = ["trans_date", "total_amt", "avg_amt", "fraud_rate", "transaction_count"]
 
     # 4) Merchant-level summary (sum, mean, count, fraud rate)
     merchant_summary = (
         df.groupby("merchant")
         .agg({
-            "amount": ["sum", "mean"],
+            "amt": ["sum", "mean"],
             "is_fraud": "mean",
             "category": "count"
         })
         .reset_index()
     )
-    merchant_summary.columns = ["merchant", "total_amount", "avg_amount", "fraud_rate", "transaction_count"]
+    merchant_summary.columns = ["merchant", "total_amt", "avg_amt", "fraud_rate", "transaction_count"]
 
     # 5) Category-level summary
     category_summary = (
         df.groupby("category")
         .agg({
-            "amount": ["sum", "mean"],
+            "amt": ["sum", "mean"],
             "is_fraud": "mean",
             "merchant": "count"
         })
         .reset_index()
     )
-    category_summary.columns = ["category", "total_amount", "avg_amount", "fraud_rate", "transaction_count"]
+    category_summary.columns = ["category", "total_amt", "avg_amt", "fraud_rate", "transaction_count"]
 
     # 6) Top merchants by fraud
     top_fraud_merchants = fraud_rate_merchant.head(10)
 
     # 7) Top merchants by revenue
-    top_revenue_merchants = merchant_summary.sort_values("total_amount", ascending=False).head(10)
+    top_revenue_merchants = merchant_summary.sort_values("total_amt", ascending=False).head(10)
 
     # Return all analytics in a dict
     return {
