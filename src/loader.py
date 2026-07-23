@@ -1,10 +1,15 @@
 import pandas as pd
 import logging
+import yaml
+
+logger = logging.getLogger(__name__)
 
 def load_data(config):
     """
     Loads raw CSV data according to settings.yaml paths.
     """
+
+    logger.info("Loading data and configuration.")
 
     # Read raw data path from YAML
     paths = config.get("paths", {})
@@ -24,9 +29,9 @@ def load_data(config):
             dtype=str,  # <-- prevents int conversion
             engine="pyarrow", # <-- pyarrow -> faster reading
         )
-        logging.info(f"Data loaded successfully from {raw_data_path}")
+        logger.info(f"Data loaded successfully from {raw_data_path}")
         return df
 
     except Exception as e:
-        logging.error(f"Failed to load CSV: {e}")
+        logger.error(f"Failed to load CSV: {e}")
         raise

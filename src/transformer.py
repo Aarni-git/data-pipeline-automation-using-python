@@ -1,10 +1,10 @@
 import pandas as pd
+import logging
+
+logger = logging.getLogger(__name__)
 
 def transform_data(df: pd.DataFrame) -> dict:
-    """
-    Transforms the cleaned data into analytics.
-    Returns a dict where every key is a DataFrame for the dashboard.
-    """
+    logger.info("Starting transformation step.")
 
     # 1) Fraud rate per merchant
     fraud_rate_merchant = (
@@ -24,7 +24,7 @@ def transform_data(df: pd.DataFrame) -> dict:
         .sort_values("fraud_rate", ascending=False)
     )
 
-    # 3) Daily summary (sum, mean, count, fraud rate)
+    # 3) Daily summary
     daily_summary = (
         df.groupby("trans_date")
         .agg({
@@ -36,7 +36,7 @@ def transform_data(df: pd.DataFrame) -> dict:
     )
     daily_summary.columns = ["trans_date", "total_amt", "avg_amt", "fraud_rate", "transaction_count"]
 
-    # 4) Merchant-level summary (sum, mean, count, fraud rate)
+    # 4) Merchant summary
     merchant_summary = (
         df.groupby("merchant")
         .agg({
@@ -48,7 +48,7 @@ def transform_data(df: pd.DataFrame) -> dict:
     )
     merchant_summary.columns = ["merchant", "total_amt", "avg_amt", "fraud_rate", "transaction_count"]
 
-    # 5) Category-level summary
+    # 5) Category summary
     category_summary = (
         df.groupby("category")
         .agg({
@@ -60,13 +60,12 @@ def transform_data(df: pd.DataFrame) -> dict:
     )
     category_summary.columns = ["category", "total_amt", "avg_amt", "fraud_rate", "transaction_count"]
 
-    # 6) Top merchants by fraud
+    # 6) Top merchants
     top_fraud_merchants = fraud_rate_merchant.head(10)
-
-    # 7) Top merchants by revenue
     top_revenue_merchants = merchant_summary.sort_values("total_amt", ascending=False).head(10)
 
-    # Return all analytics in a dict
+    logger.info("Transformation step completed.")
+
     return {
         "fraud_rate_merchant": fraud_rate_merchant,
         "fraud_rate_category": fraud_rate_category,
@@ -76,6 +75,3 @@ def transform_data(df: pd.DataFrame) -> dict:
         "top_fraud_merchants": top_fraud_merchants,
         "top_revenue_merchants": top_revenue_merchants
     }
-
-
-

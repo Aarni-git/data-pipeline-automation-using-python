@@ -1,0 +1,32 @@
+2026-07-23 10:53:28,169 | INFO | root | Pipeline started.
+2026-07-23 10:53:28,170 | INFO | src.loader | Loading data and configuration.
+2026-07-23 10:53:36,075 | INFO | src.loader | Data loaded successfully from data/raw/credit_card_transactions.csv
+2026-07-23 10:53:36,075 | INFO | root | Data loaded.
+2026-07-23 10:53:36,075 | INFO | src.cleaner | Starting cleaning step.
+2026-07-23 10:53:38,515 | INFO | src.cleaner | Removed 0 duplicate rows.
+2026-07-23 10:53:38,516 | INFO | src.cleaner | Missing values filled according to YAML settings.
+2026-07-23 10:53:40,205 | INFO | src.cleaner | Cleaning step completed.
+2026-07-23 10:53:40,205 | INFO | root | Data cleaned.
+2026-07-23 10:53:40,205 | INFO | src.transformer | Starting transformation step.
+2026-07-23 10:53:40,659 | INFO | src.transformer | Transformation step completed.
+2026-07-23 10:53:40,659 | INFO | root | Data transformed.
+2026-07-23 10:53:40,659 | INFO | src.exporter | Starting export step.
+2026-07-23 10:53:40,673 | INFO | src.exporter | Saved aggregated data to data/processed/.
+2026-07-23 10:53:40,673 | INFO | root | Results exported.
+2026-07-23 10:53:40,673 | INFO | root | Pipeline finished.
+2026-07-23 10:54:44,638 | INFO | root | Pipeline started.
+2026-07-23 10:54:44,639 | INFO | src.loader | Loading data and configuration.
+2026-07-23 10:54:52,639 | INFO | src.loader | Data loaded successfully from data/raw/credit_card_transactions.csv
+2026-07-23 10:54:52,639 | INFO | root | Data loaded.
+2026-07-23 10:54:52,639 | INFO | src.cleaner | Starting cleaning step.
+2026-07-23 10:54:55,067 | INFO | src.cleaner | Removed 0 duplicate rows.
+2026-07-23 10:54:55,068 | INFO | src.cleaner | Missing values filled according to YAML settings.
+2026-07-23 10:54:56,776 | INFO | src.cleaner | Cleaning step completed.
+2026-07-23 10:54:56,776 | INFO | root | Data cleaned.
+2026-07-23 10:54:56,776 | INFO | src.transformer | Starting transformation step.
+2026-07-23 10:54:57,267 | INFO | src.transformer | Transformation step completed.
+2026-07-23 10:54:57,267 | INFO | root | Data transformed.
+2026-07-23 10:54:57,267 | INFO | src.exporter | Starting export step.
+2026-07-23 10:54:57,281 | INFO | src.exporter | Saved aggregated data to data/processed/.
+2026-07-23 10:54:57,281 | INFO | root | Results exported.
+2026-07-23 10:54:57,281 | INFO | root | Pipeline finished.

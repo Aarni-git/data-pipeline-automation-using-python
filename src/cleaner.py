@@ -1,10 +1,14 @@
 import pandas as pd
 import logging
 
+logger = logging.getLogger(__name__)
+
 def clean_data(df, config):
     """
     Cleans the loaded DataFrame according to settings.yaml rules.
     """
+
+    logger.info("Starting cleaning step.")
 
     # Read processing settings from YAML
     processing_settings = config.get("processing", {})
@@ -19,7 +23,7 @@ def clean_data(df, config):
         before = len(df)
         df = df.drop_duplicates()
         after = len(df)
-        logging.info(f"Removed {before - after} duplicate rows.")
+        logger.info(f"Removed {before - after} duplicate rows.")
 
     # Fill missing values according to YAML
     # Fill numeric column "amount"
@@ -30,7 +34,7 @@ def clean_data(df, config):
     if fill_category_value is not None and "category" in df.columns:
         df["category"] = df["category"].fillna(fill_category_value)
 
-    logging.info("Missing values filled according to YAML settings.")
+    logger.info("Missing values filled according to YAML settings.")
 
     # Convert data types (optional but recommended)
     # Convert amount → float
@@ -53,7 +57,7 @@ def clean_data(df, config):
     if "category" in df.columns:
         df["category"] = df["category"].astype(str)
 
-    logging.info("Data types converted where applicable.")
+    logger.info("Cleaning step completed.")
 
     # Return cleaned DataFrame
     return df
